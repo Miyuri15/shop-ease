@@ -3,6 +3,13 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-native",
+    "typeRoots": ["./node_modules/@types", "./@types"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
     "moduleResolution": "node",
     "target": "esnext",
     "allowSyntheticDefaultImports": true,
@@ -18,5 +25,7 @@
   ],
   "exclude": [
     "node_modules"
-  ]
-}
+  ],
+
+  
+  }
