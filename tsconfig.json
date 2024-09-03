@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-native",
+
     "baseUrl": "./",
     "paths": {
       "@/*": [
@@ -17,13 +18,15 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "/*.ts",
-    "/*.tsx",
-    ".expo/types//*.ts",
-    "expo-env.d.ts",
-    ".expo/types/**/*.ts"
+
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
   ],
   "exclude": [
     "node_modules"
-  ]
-}
+  ],
+
+  
+  }
