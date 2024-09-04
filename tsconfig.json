@@ -3,6 +3,12 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react-native",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
     "moduleResolution": "node",
     "target": "esnext",
     "allowSyntheticDefaultImports": true,
@@ -10,6 +16,14 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "/*.ts",
+    "/*.tsx",
+    ".expo/types//*.ts",
+    "expo-env.d.ts",
+    ".expo/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
