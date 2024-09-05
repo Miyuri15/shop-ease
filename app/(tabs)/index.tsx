@@ -6,8 +6,6 @@ import { ref, set, onValue } from 'firebase/database';
 interface Post {
   id: string;
   itemName: string;
-  discount: string;
-  promotion: string;
   stock: string;
   brand: string;
 }
@@ -34,19 +32,6 @@ const AddData = () => {
     setBrand('');
   };
 
-  useEffect(() => {
-    const starCountRef = ref(db, 'promotions/');
-    onValue(starCountRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        const newPosts: Post[] = Object.keys(data).map((key) => ({
-          id: key,
-          ...data[key],
-        }));
-        setTodoData(newPosts);
-      }
-    });
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -76,8 +61,6 @@ const AddData = () => {
       {/* {todoData.map((item) => (
         <View key={item.id}>
           <Text>{item.itemName}</Text>
-          <Text>{item.discount}</Text>
-          <Text>{item.promotion}</Text>
           <Text>{item.stock}</Text>
           <Text>{item.brand}</Text>
         </View>
