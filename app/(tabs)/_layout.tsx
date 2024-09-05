@@ -58,6 +58,7 @@ export default function TabLayout() {
       />
 
 <Tabs.Screen
+
                name="Cart"
                options={{
                  title: 'Cart',
@@ -78,6 +79,7 @@ export default function TabLayout() {
                  ),
                }}
        
+
       />
 
     </Tabs>
