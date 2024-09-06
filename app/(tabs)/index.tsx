@@ -6,8 +6,6 @@ import { ref, set, onValue } from 'firebase/database';
 interface Post {
   id: string;
   itemName: string;
-  discount: string;
-  promotion: string;
   stock: string;
   brand: string;
   weight: string;
@@ -242,6 +240,7 @@ const AddData = () => {
     });
   };
 
+
   useEffect(() => {
     const starCountRef = ref(db, 'items/');
     onValue(starCountRef, (snapshot) => {
@@ -255,6 +254,7 @@ const AddData = () => {
       }
     });
   }, []);
+
 
   return (
     <View style={styles.container}>
@@ -308,6 +308,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    padding: 10,
   },
   header: {
     fontSize: 30,
