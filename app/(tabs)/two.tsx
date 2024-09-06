@@ -1,11 +1,11 @@
 
 
-import { StyleSheet, TextInput, Button, Text, View, Alert } from 'react-native';
+import { StyleSheet, TextInput, Button, Text, View, Alert ,TouchableOpacity} from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { db } from '../config';
 import { ref, set, onValue, get } from 'firebase/database';
-import Voice from 'react-native-voice';
 import * as Speech from 'expo-speech';
+import Voice from '@react-native-voice/voice';
 
 
 interface Post {
@@ -466,9 +466,44 @@ useEffect(() => {
     }
   };
   
+    const [result , setResult] = useState('');
+    const [ error, setError] = useState('');
+    const [isRecording , setIsRecording] = useState(false);
+
+    Voice.onSpeechStart = () => setIsRecording(true);
+    Voice.onSpeechEnd = () => setIsRecording(false);
+    Voice.onSpeechError = err => setError(err.error?.message || 'Unknown error');
+    Voice.onSpeechResults = result => setResult(result.value?.[0] || '');  
+    
+    const startRecording = async () => {
+      try {
+        await Voice.start('en-US');
+      } catch (err) {
+        setError(JSON.stringify(err) || 'Unknown error');
+      }
+    };
+    
+    const stopRecording = async () => {
+      try {
+        await Voice.stop();
+      } catch (err) {
+        setError(JSON.stringify(err) || 'Unknown error');
+      }
+    };
+    
+
+   
 
   return (
     <View style={styles.container}>
+      <Text> Voice Input </Text>
+      <Text>{result}</Text>
+      <Text>{error}</Text>
+      <TouchableOpacity onPress={isRecording ? stopRecording : startRecording}>
+        <Text>
+          {isRecording ? 'stop Recording' : 'Start Recording'}
+        </Text>
+      </TouchableOpacity>
       <Text style={styles.header}>Add Data</Text>
       <TextInput
         style={styles.input}
@@ -490,21 +525,23 @@ useEffect(() => {
         keyboardType="numeric"
       />
       <Button title="Search Promotion" onPress={searchPromotion} />
-      <View style={styles.listContainer}>
+      {/* <View style={styles.listContainer}>
         {todoData.map((post) => (
           <View key={post.id} style={styles.listItem}>
             <Text>{`Item: ${post.itemName}, Brand: ${post.brand}, Discount: ${post.discount}, Promotion: ${post.promotion}`}</Text>
           </View>
         ))}
-      </View>
+      </View> */}
     </View>
   );
+
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#fff',
   },
   input: {
     height: 40,
@@ -512,7 +549,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     padding: 10,
-    color:'white'
+   
   },
   header: {
     fontSize: 24,
@@ -524,6 +561,7 @@ const styles = StyleSheet.create({
   listItem: {
     marginBottom: 10,
   },
+  
 });
 
 export default AddData;

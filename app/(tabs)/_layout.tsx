@@ -2,7 +2,6 @@ import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Link, Tabs } from 'expo-router';
 import { Pressable } from 'react-native';
-import Cart from './cart';
  // Import Cart component
 
 import Colors from '../../constants/Colors';
@@ -60,7 +59,7 @@ export default function TabLayout() {
 <Tabs.Screen
 
 
-               name="Cart"
+               name="three"
                options={{
                  title: 'Cart',
                  tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
